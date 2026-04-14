@@ -1,69 +1,54 @@
 <#
 .SYNOPSIS
-    Découvre les métriques disponibles pour les ressources Azure avec fallback 3 niveaux
+    Discovers available Azure metrics for resources found in an audit CSV.
 
 .DESCRIPTION
-    Ce script implémente une logique de fallback à 3 niveaux pour découvrir les métriques:
-    1. Dictionnaire client spécifique (overrides)
-    2. Dictionnaire global (référence)
-    3. Discovery PowerShell (Get-AzMetricDefinition)
-    
-    Les métriques découvertes via PowerShell sont ajoutées aux suggestions pour validation.
+    Reads audit.csv, groups resources by type, discovers metrics via
+    Get-AzMetricDefinition, and cross-references a metrics dictionary to
+    classify each metric as known or new (suggestion).
 
-.PARAMETER ResourceId
-    ID complet de la ressource Azure
+.PARAMETER AuditCsvPath
+    Path to the audit.csv file produced by Generate-AuditReport.ps1
 
-.PARAMETER ResourceType
-    Type de ressource (ex: microsoft.compute/virtualmachines)
+.PARAMETER DictionaryPath
+    Path to the metrics-dictionary.csv reference file
 
-.PARAMETER ClientName
-    Nom du client
+.PARAMETER ExcludeMetrics
+    Array of metric names to exclude from results
 
-.PARAMETER Environment
-    Environnement (dev, test, prod, etc.)
-
-.EXAMPLE
-    .\Discover-Metrics.ps1 -ResourceId "/subscriptions/.../resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm1" -ResourceType "microsoft.compute/virtualmachines" -ClientName "Squadra" -Environment "Dev"
+.PARAMETER OutputDir
+    Directory where output files will be written
 #>
 
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)]
-    [string]$ResourceId,
-    
+    [string]$AuditCsvPath,
+
     [Parameter(Mandatory=$true)]
-    [string]$ResourceType,
-    
-    [Parameter(Mandatory=$true)]
-    [string]$ClientName,
-    
+    [string]$DictionaryPath,
+
     [Parameter(Mandatory=$false)]
-    [string]$Environment = ""
+    [string[]]$ExcludeMetrics = @(),
+
+    [Parameter(Mandatory=$true)]
+    [string]$OutputDir
 )
 
 $ErrorActionPreference = "Continue"
 
-# Déterminer le chemin de base du repo
-$scriptPath = $PSScriptRoot
-$repoRoot = Split-Path (Split-Path (Split-Path $scriptPath -Parent) -Parent) -Parent
-
-# Chemins des dictionnaires
-$globalDictPath = Join-Path $repoRoot "DevOps\Dictionaries\Global\metrics-dictionary.csv"
-
-if ([string]::IsNullOrEmpty($Environment)) {
-    $clientDictPath = Join-Path $repoRoot "DevOps\Clients\$ClientName\Dictionaries\metrics-overrides.csv"
-    $suggestionsPath = Join-Path $repoRoot "DevOps\Clients\$ClientName\Dictionaries\suggestions-metrics.csv"
-} else {
-    $clientDictPath = Join-Path $repoRoot "DevOps\Clients\$ClientName\Dictionaries\$Environment\metrics-overrides.csv"
-    $suggestionsPath = Join-Path $repoRoot "DevOps\Clients\$ClientName\Dictionaries\$Environment\suggestions-metrics.csv"
+# Ensure output directory exists
+if (-not (Test-Path $OutputDir)) {
+    New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
 }
+
+$suggestionsPath = "$OutputDir/suggestions-metrics.csv"
 
 function Write-Log {
     param(
         [string]$Message,
         [string]$Level = 'Info'
     )
-    
     $color = switch($Level) {
         'Info' { 'Cyan' }
         'Warning' { 'Yellow' }
@@ -71,182 +56,115 @@ function Write-Log {
         'Success' { 'Green' }
         default { 'White' }
     }
-    
     Write-Host "[$Level] $Message" -ForegroundColor $color
-}
-
-function Get-MetricConfiguration {
-    param(
-        [string]$ResourceType,
-        [string]$MetricName,
-        [hashtable]$ClientDict,
-        [hashtable]$GlobalDict
-    )
-    
-    # Niveau 1: Dictionnaire client
-    $key = "$ResourceType|$MetricName"
-    if ($ClientDict.ContainsKey($key)) {
-        Write-Log "  ✓ Trouvé dans dictionnaire client: $MetricName" -Level Success
-        $config = $ClientDict[$key]
-        $config | Add-Member -MemberType NoteProperty -Name "_Source" -Value "Client" -Force
-        return $config
-    }
-    
-    # Niveau 2: Dictionnaire global
-    if ($GlobalDict.ContainsKey($key)) {
-        Write-Log "  ✓ Trouvé dans dictionnaire global: $MetricName" -Level Info
-        $config = $GlobalDict[$key]
-        $config | Add-Member -MemberType NoteProperty -Name "_Source" -Value "Global" -Force
-        return $config
-    }
-    
-    # Niveau 3: Pas trouvé
-    Write-Log "  ⚠ Métrique non trouvée dans dictionnaires: $MetricName" -Level Warning
-    return $null
-}
-
-function Add-ToSuggestions {
-    param(
-        [PSCustomObject]$MetricConfig
-    )
-    
-    # Créer le dossier si nécessaire
-    $suggestionsDir = Split-Path $suggestionsPath -Parent
-    if (-not (Test-Path $suggestionsDir)) {
-        New-Item -ItemType Directory -Path $suggestionsDir -Force | Out-Null
-    }
-    
-    # Charger les suggestions existantes
-    $existingSuggestions = @()
-    if (Test-Path $suggestionsPath) {
-        $existingSuggestions = Import-Csv -Path $suggestionsPath
-    }
-    
-    # Vérifier si la suggestion existe déjà
-    $key = "$($MetricConfig.ResourceType)|$($MetricConfig.AlertMetricName)"
-    $exists = $existingSuggestions | Where-Object { 
-        "$($_.ResourceType)|$($_.AlertMetricName)" -eq $key 
-    }
-    
-    if (-not $exists) {
-        # Ajouter la nouvelle suggestion
-        $MetricConfig | Export-Csv -Path $suggestionsPath -NoTypeInformation -Encoding UTF8 -Append
-        Write-Log "  ➕ Ajouté aux suggestions: $($MetricConfig.AlertMetricName)" -Level Success
-    }
 }
 
 # ============================================================================
 # MAIN
 # ============================================================================
 
-Write-Log "=== Découverte des métriques ===" -Level Info
-Write-Log "ResourceType: $ResourceType" -Level Info
-Write-Log "ResourceId: $ResourceId" -Level Info
+Write-Log "=== Metric Discovery ===" -Level Info
 
-# Charger le dictionnaire global
-if (-not (Test-Path $globalDictPath)) {
-    Write-Log "Dictionnaire global introuvable: $globalDictPath" -Level Error
+# Load audit CSV
+if (-not (Test-Path $AuditCsvPath)) {
+    Write-Log "Audit CSV not found: $AuditCsvPath" -Level Error
     exit 1
 }
 
-Write-Log "Chargement du dictionnaire global..." -Level Info
-$globalDictArray = Import-Csv -Path $globalDictPath
+$auditResources = Import-Csv -Path $AuditCsvPath
+Write-Log "Loaded $($auditResources.Count) resources from audit" -Level Success
+
+# Load dictionary
 $globalDict = @{}
-foreach ($entry in $globalDictArray) {
-    $key = "$($entry.ResourceType)|$($entry.AlertMetricName)"
-    if (-not $globalDict.ContainsKey($key)) {
-        $globalDict[$key] = $entry
-    }
-}
-Write-Log "  -> $($globalDict.Count) entrées chargées" -Level Success
-
-# Charger le dictionnaire client (si existe)
-$clientDict = @{}
-if (Test-Path $clientDictPath) {
-    Write-Log "Chargement du dictionnaire client..." -Level Info
-    $clientDictArray = Import-Csv -Path $clientDictPath
-    foreach ($entry in $clientDictArray) {
+if (Test-Path $DictionaryPath) {
+    $dictEntries = Import-Csv -Path $DictionaryPath
+    foreach ($entry in $dictEntries) {
         $key = "$($entry.ResourceType)|$($entry.AlertMetricName)"
-        $clientDict[$key] = $entry
+        if (-not $globalDict.ContainsKey($key)) {
+            $globalDict[$key] = $entry
+        }
     }
-    Write-Log "  -> $($clientDict.Count) surcharge(s) chargée(s)" -Level Success
+    Write-Log "Loaded $($globalDict.Count) dictionary entries" -Level Success
+} else {
+    Write-Log "Dictionary not found: $DictionaryPath (will discover all)" -Level Warning
 }
 
-# Découvrir les métriques disponibles via PowerShell
-Write-Log "Découverte des métriques disponibles via Azure..." -Level Info
+# Group audit resources by type and pick one sample per type for metric discovery
+$resourcesByType = $auditResources | Group-Object -Property ResourceType
 
-try {
-    $availableMetrics = Get-AzMetricDefinition -ResourceId $ResourceId -ErrorAction Stop
-    Write-Log "  -> $($availableMetrics.Count) métriques disponibles" -Level Success
-} catch {
-    Write-Log "Erreur lors de la découverte des métriques: $_" -Level Error
-    exit 1
-}
-
-# Résultats
 $configuredMetrics = @()
 $discoveredMetrics = @()
 
-foreach ($metric in $availableMetrics) {
-    $metricName = $metric.Name.Value
-    
-    # Chercher dans dictionnaires (Niveau 1 et 2)
-    $config = Get-MetricConfiguration -ResourceType $ResourceType -MetricName $metricName -ClientDict $clientDict -GlobalDict $globalDict
-    
-    if ($config) {
-        $configuredMetrics += $config
-    } else {
-        # Niveau 3: Créer suggestion
-        Write-Log "  🔍 Découverte PowerShell: $metricName" -Level Info
-        
-        # Déterminer l'agrégation par défaut
-        $aggregation = if ($metric.PrimaryAggregationType) { 
-            $metric.PrimaryAggregationType 
-        } else { 
-            "Average" 
+foreach ($group in $resourcesByType) {
+    $resType = $group.Name
+    # Take first resource as sample for metric definitions
+    $sampleResource = $group.Group | Select-Object -First 1
+    $resourceId = $sampleResource.ResourceId
+
+    if ([string]::IsNullOrWhiteSpace($resourceId)) { continue }
+
+    Write-Log "`nResource type: $resType ($($group.Count) resources)" -Level Info
+
+    try {
+        $availableMetrics = Get-AzMetricDefinition -ResourceId $resourceId -ErrorAction Stop
+        Write-Log "  -> $($availableMetrics.Count) metrics available" -Level Success
+    } catch {
+        Write-Log "  Error discovering metrics for $resType : $_" -Level Error
+        continue
+    }
+
+    foreach ($metric in $availableMetrics) {
+        $metricName = $metric.Name.Value
+
+        # Skip excluded metrics
+        if ($ExcludeMetrics -contains $metricName) { continue }
+
+        $key = "$($resType.ToLower())|$metricName"
+
+        if ($globalDict.ContainsKey($key)) {
+            Write-Log "  Found in dictionary: $metricName" -Level Success
+            $config = $globalDict[$key]
+            $config | Add-Member -MemberType NoteProperty -Name "_Source" -Value "Dictionary" -Force
+            $configuredMetrics += $config
+        } else {
+            Write-Log "  New metric: $metricName" -Level Warning
+            $aggregation = if ($metric.PrimaryAggregationType) { $metric.PrimaryAggregationType } else { "Average" }
+            $suggestion = [PSCustomObject]@{
+                ResourceType        = $resType.ToLower()
+                AlertMetricName     = $metricName
+                Count               = $group.Count
+                AlertOperator       = "GreaterThanOrEqual"
+                Aggregation         = $aggregation
+                Dimensions          = ""
+                EvaluationFrequency = "PT5M"
+                WindowSize          = "PT5M"
+                DSExport            = "Yes"
+                Severity            = "2"
+                Threshold           = "XX"
+                FriendlyName        = ""
+                Unit                = $metric.Unit
+                _Source             = "Discovery"
+                _DateDiscovered     = (Get-Date -Format "yyyy-MM-dd")
+            }
+            $discoveredMetrics += $suggestion
         }
-        
-        # Créer configuration par défaut
-        $suggestion = [PSCustomObject]@{
-            ResourceType = $ResourceType.ToLower()
-            AlertMetricName = $metricName
-            Count = ""
-            AlertOperator = "GreaterThanOrEqual"
-            Aggregation = $aggregation
-            Dimensions = ""
-            EvaluationFrequency = "PT5M"
-            WindowSize = "PT5M"
-            DSExport = "Yes"
-            Severity = "2"  # Warning par défaut
-            Threshold = "XX"  # À définir par consultant
-            FriendlyName = ""
-            Unit = $metric.Unit
-            MetricAvailabilities = ($metric.MetricAvailabilities | ForEach-Object { "$($_.TimeGrain)" }) -join ";"
-            _Source = "Discovery"
-            _DateDiscovered = (Get-Date -Format "yyyy-MM-dd")
-        }
-        
-        Add-ToSuggestions -MetricConfig $suggestion
-        $discoveredMetrics += $suggestion
     }
 }
 
-# Résumé
-Write-Log "`n=== RÉSUMÉ ===" -Level Info
-Write-Log "Métriques configurées (dictionnaires): $($configuredMetrics.Count)" -Level Success
-Write-Log "  - Depuis dictionnaire client: $(($configuredMetrics | Where-Object { $_._Source -eq 'Client' }).Count)" -Level Info
-Write-Log "  - Depuis dictionnaire global: $(($configuredMetrics | Where-Object { $_._Source -eq 'Global' }).Count)" -Level Info
-Write-Log "Métriques découvertes (suggestions): $($discoveredMetrics.Count)" -Level Warning
+# Export suggestions
+if ($discoveredMetrics.Count -gt 0) {
+    $discoveredMetrics | Export-Csv -Path $suggestionsPath -NoTypeInformation -Encoding UTF8
+    Write-Log "`nSuggestions exported: $suggestionsPath ($($discoveredMetrics.Count))" -Level Success
+}
+
+# Summary
+Write-Log "`n=== SUMMARY ===" -Level Info
+Write-Log "Configured metrics (from dictionary): $($configuredMetrics.Count)" -Level Success
+Write-Log "Discovered metrics (suggestions): $($discoveredMetrics.Count)" -Level Warning
 
 if ($discoveredMetrics.Count -gt 0) {
-    Write-Log "`n⚠️  ATTENTION: $($discoveredMetrics.Count) métriques découvertes nécessitent validation" -Level Warning
-    Write-Log "Fichier de suggestions: $suggestionsPath" -Level Info
-    Write-Log "`nActions recommandées:" -Level Info
-    Write-Log "1. Consulter le fichier suggestions-metrics.csv" -Level Info
-    Write-Log "2. Définir les thresholds appropriés (remplacer 'XX')" -Level Info
-    Write-Log "3. Choisir:" -Level Info
-    Write-Log "   - Ajouter à metrics-overrides.csv (client) pour usage spécifique" -Level Info
-    Write-Log "   - Proposer à metrics-dictionary.csv (global) pour bonne pratique" -Level Info
+    Write-Log "`nATTENTION: $($discoveredMetrics.Count) discovered metrics need validation" -Level Warning
+    Write-Log "Review $suggestionsPath and define thresholds (replace 'XX')" -Level Info
 }
 
 # Retourner les résultats
