@@ -2,26 +2,94 @@
 tags:
   dest_branch:
     poc: "^poc$"
-    dev: "^develop$"
-    prod: "^main$"
-    monitor-poc: "^monitor-poc$"
-    monitor-dev: "^monitor-dev$"
-    monitor-prod: "^monitor-prod$"
 
 dirs:
   "terraform":
     tags: ["deployflow"]
-  "monitoring":
-    tags: ["monitoring"]
 
 destination_branches:
   - "poc"
-  - "develop"
-  - "main"
-  - "monitor-poc"
-  - "monitor-dev"
-  - "monitor-prod"
 
 engine:
   name: "terraform"
   version: "1.14.5"
+
+drift:
+  enabled: true
+  schedule: "hourly"
+  reconcile: false
+
+hooks:
+  plan:
+    post:
+      - type: drift_create_issue
+
+workflows:
+  # POC WORKFLOW - triggered on poc branch
+  - tag_query: "deployflow and dest_branch:poc"
+    plan:
+      - type: env
+        name: ARM_TENANT_ID
+        cmd: ['echo', '${POC_ARM_TENANT_ID}']
+      - type: env
+        name: ARM_SUBSCRIPTION_ID
+        cmd: ['echo', '${POC_ARM_SUBSCRIPTION_ID}']
+      - type: env
+        name: ARM_CLIENT_ID
+        cmd: ['echo', '${POC_ARM_CLIENT_ID}']
+      - type: env
+        name: ARM_CLIENT_SECRET
+        cmd: ['echo', '${POC_ARM_CLIENT_SECRET}']
+        sensitive: true
+      - type: env
+        name: TF_VAR_postgresql_admin_password
+        cmd: ['echo', '${POC_POSTGRESQL_ADMIN_PASSWORD}']
+        sensitive: true
+      - type: init
+        extra_args:
+          - "-input=false"
+          - "-reconfigure"
+          - "-backend-config=tenant_id=${POC_TFSTATE_TENANT_ID}"
+          - "-backend-config=client_id=${POC_TFSTATE_CLIENT_ID}"
+          - "-backend-config=client_secret=${POC_TFSTATE_CLIENT_SECRET}"
+          - "-backend-config=subscription_id=${POC_TFSTATE_SUB}"
+          - "-backend-config=resource_group_name=${POC_TFSTATE_RG}"
+          - "-backend-config=storage_account_name=${POC_STORAGE}"
+          - "-backend-config=container_name=tfstate"
+          - "-backend-config=key=poc.terraform.tfstate"
+      - type: plan
+        extra_args: ["-var-file=poc.tfvars"]
+
+    apply:
+      - type: env
+        name: ARM_TENANT_ID
+        cmd: ['echo', '${POC_ARM_TENANT_ID}']
+      - type: env
+        name: ARM_SUBSCRIPTION_ID
+        cmd: ['echo', '${POC_ARM_SUBSCRIPTION_ID}']
+      - type: env
+        name: ARM_CLIENT_ID
+        cmd: ['echo', '${POC_ARM_CLIENT_ID}']
+      - type: env
+        name: ARM_CLIENT_SECRET
+        cmd: ['echo', '${POC_ARM_CLIENT_SECRET}']
+        sensitive: true
+      - type: env
+        name: TF_VAR_postgresql_admin_password
+        cmd: ['echo', '${POC_POSTGRESQL_ADMIN_PASSWORD}']
+        sensitive: true
+      - type: init
+        extra_args:
+          - "-input=false"
+          - "-reconfigure"
+          - "-backend-config=tenant_id=${POC_TFSTATE_TENANT_ID}"
+          - "-backend-config=client_id=${POC_TFSTATE_CLIENT_ID}"
+          - "-backend-config=client_secret=${POC_TFSTATE_CLIENT_SECRET}"
+          - "-backend-config=subscription_id=${POC_TFSTATE_SUB}"
+          - "-backend-config=resource_group_name=${POC_TFSTATE_RG}"
+          - "-backend-config=storage_account_name=${POC_STORAGE}"
+          - "-backend-config=container_name=tfstate"
+          - "-backend-config=key=poc.terraform.tfstate"
+      - type: apply
+        extra_args: ["-var-file=poc.tfvars"]
+
