@@ -1,0 +1,2542 @@
+[
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Network In Total",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Network Out Total",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Network Out",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Network In",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Disk Read Operations/Sec",
+    "reason": "Covered by other metrics"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Disk Write Operations/Sec",
+    "reason": "Covered by other metrics"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Bandwidth Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk IOPS Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Bandwidth Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk IOPS Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Inbound Flows",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Outbound Flows",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Inbound Flows Maximum Creation Rate",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Outbound Flows Maximum Creation Rate",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Premium Data Disk Cache Read Hit",
+    "reason": "Premium disk specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Premium Data Disk Cache Read Miss",
+    "reason": "Premium disk specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Premium OS Disk Cache Read Hit",
+    "reason": "Premium disk specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Premium OS Disk Cache Read Miss",
+    "reason": "Premium disk specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Cached Bandwidth Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Cached IOPS Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Uncached Bandwidth Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Uncached IOPS Consumed Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Disk Read Bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Disk Write Bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "CPU Credits Remaining",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "CPU Credits Consumed",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Read Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Write Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Read Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Write Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Queue Depth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Latency",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Target Bandwidth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Target IOPS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Max Burst Bandwidth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Max Burst IOPS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Used Burst BPS Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Data Disk Used Burst IO Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Read Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Write Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Read Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Write Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Queue Depth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Latency",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Target Bandwidth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Target IOPS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Max Burst Bandwidth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Max Burst IOPS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Used Burst BPS Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "OS Disk Used Burst IO Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Latency",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Read Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Write Bytes/sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Read Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Write Operations/Sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Temp Disk Queue Depth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "Available Memory Bytes",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Remote Used Burst IO Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Remote Used Burst BPS Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Local Used Burst IO Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.compute/virtualmachines",
+    "metricName": "VM Local Used Burst BPS Credits Percentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.storage/storageaccounts",
+    "metricName": "Transactions",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.storage/storageaccounts",
+    "metricName": "Ingress",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.storage/storageaccounts",
+    "metricName": "Egress",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.storage/storageaccounts",
+    "metricName": "SuccessServerLatency",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.storage/storageaccounts",
+    "metricName": "SuccessE2ELatency",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/natgateways",
+    "metricName": "TotalConnectionCount",
+    "reason": "Not critical"
+  },
+  {
+    "resourceType": "microsoft.network/natgateways",
+    "metricName": "ByteCount",
+    "reason": "Not critical"
+  },
+  {
+    "resourceType": "microsoft.network/natgateways",
+    "metricName": "PacketDropCount",
+    "reason": "Not critical"
+  },
+  {
+    "resourceType": "microsoft.network/natgateways",
+    "metricName": "PacketCount",
+    "reason": "Not critical"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "BytesReceived",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "BytesSent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpSynSent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpSynReceived",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpEstablished",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpFinWait1",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpFinWait2",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpClosing",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpCloseWait",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpLastAck",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "TcpTimeWait",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "SocketInboundAll",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "SocketOutboundAll",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "SocketOutboundEstablished",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "SocketOutboundTimeWait",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/serverfarms",
+    "metricName": "SocketLoopback",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "CpuTime",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Requests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "BytesReceived",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "BytesSent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http101",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http2xx",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http3xx",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http401",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http403",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http404",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Http406",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "MemoryWorkingSet",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "AverageMemoryWorkingSet",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "AverageResponseTime",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "AppConnections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Handles",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Threads",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "InstanceCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "PrivateBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoReadBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoWriteBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoOtherBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoReadOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoWriteOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "IoOtherOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "RequestsInApplicationQueue",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "CurrentAssemblies",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "TotalAppDomains",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "TotalAppDomainsUnloaded",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Gen0Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Gen1Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "Gen2Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "FileSystemUsage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "bloat_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "database_size_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tps",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "backup_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "cpu_credits_consumed",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "cpu_credits_remaining",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "iops",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "disk_queue_depth",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "read_throughput",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "write_throughput",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "read_iops",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "write_iops",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "storage_used",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "storage_free",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "txlogs_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "xact_total",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "xact_commit",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "numbackends",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tup_inserted",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tup_updated",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tup_returned",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tup_fetched",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "temp_files",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "temp_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "blks_read",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "blks_hit",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "sessions_by_state",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "sessions_by_wait_event_type",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "oldest_backend_time_sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "oldest_backend_xmin",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "oldest_backend_xmin_age",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "longest_query_time_sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "longest_transaction_time_sec",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "physical_replication_delay_in_seconds",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "physical_replication_delay_in_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "logical_replication_delay_in_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "max_connections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "network_bytes_egress",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "network_bytes_ingress",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "connections_succeeded",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "maximum_used_transactionIDs",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "analyze_count_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "autoanalyze_count_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "autovacuum_count_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "n_dead_tup_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "n_live_tup_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "n_mod_since_analyze_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tables_analyzed_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tables_autoanalyzed_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tables_autovacuumed_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tables_counter_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tables_vacuumed_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "vacuum_count_user_tables",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "client_connections_active",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "server_connections_active",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "server_connections_idle",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "total_pooled_connections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "num_pools",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "tcp_connection_backlog",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+    "metricName": "postmaster_process_cpu_usage_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers",
+    "metricName": "storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers",
+    "metricName": "dtu_used",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "physical_data_read_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "log_write_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "storage",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "connection_successful",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "connection_failed_user_error",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "blocked_by_firewall",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "replication_lag_seconds",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "xtp_storage_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sessions_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sessions_count",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "cpu_limit",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "cpu_used",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sqlserver_process_core_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sqlserver_process_memory_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sql_instance_cpu_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "sql_instance_memory_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "tempdb_data_size",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "tempdb_log_size",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "app_cpu_billed",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "app_cpu_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "app_memory_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "allocated_data_storage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "full_backup_size_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "diff_backup_size_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "log_backup_size_bytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricName": "ledger_digest_upload_success",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "Throughput",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "HealthyHostCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "TotalRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AvgRequestCountPerHealthyHost",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "CurrentConnections",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "NewConnectionsPerSecond",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "WebSocketActiveConnections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "WebsocketSpecificCloseStatusCode",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "CapacityUnits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "FixedBillableCapacityUnits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "EstimatedBilledCapacityUnits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "ComputeUnits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BackendResponseStatus",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "TlsProtocol",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BytesSent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BytesReceived",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "ClientRtt",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "ApplicationGatewayTotalTime",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BackendConnectTime",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BackendFirstByteResponseTime",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "BackendLastByteResponseTime",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafTotalRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafCustomRule",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafSecRule",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafBotProtection",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzWAFJSChallengeRequestCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzWAFCaptchaChallengeRequestCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafPenaltyBoxHits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/applicationgateways",
+    "metricName": "AzwafPenaltyBoxSize",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/autoscalesettings",
+    "metricName": "ObservedMetricValue",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.insights/autoscalesettings",
+    "metricName": "MetricThreshold",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.insights/autoscalesettings",
+    "metricName": "ObservedCapacity",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.insights/autoscalesettings",
+    "metricName": "ScaleActionsInitiated",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "network_bytes_egress",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "network_bytes_ingress",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "active_connections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "total_connections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Queries",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "io_consumption_percent",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "storage_io_count",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "storage_used",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "data_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "ibdata1_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "binlog_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "others_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "storage_limit",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "backup_storage_used",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "replication_lag",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "cpu_credits_remaining",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "cpu_credits_consumed",
+    "reason": "B-series specific"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_select",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_update",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_insert",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_delete",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_create_db",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_drop_db",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_alter_table",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_create_table",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Com_drop_table",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_reads",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_read_requests",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_pages_free",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_pages_data",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_pages_dirty",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "serverlog_storage_usage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "serverlog_storage_limit",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Sort_merge_passes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Replica_IO_Running",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Replica_SQL_Running",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "HA_IO_status",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "HA_SQL_status",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "HA_replication_lag",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_row_lock_time",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_data_writes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_row_lock_waits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Innodb_buffer_pool_pages_flushed",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Uptime",
+    "reason": "Not relevant for monitoring"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "active_transactions",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "trx_rseg_history_len",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.dbformysql/flexibleservers",
+    "metricName": "Threads_running",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "availabilityResults/count",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "availabilityResults/duration",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "browserTimings/networkDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "browserTimings/processingDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "browserTimings/receiveDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "browserTimings/sendDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "browserTimings/totalDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "dependencies/count",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "dependencies/duration",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "pageViews/count",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "pageViews/duration",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/requestExecutionTime",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/requestsInQueue",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/requestsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/exceptionsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/processIOBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/processCpuPercentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/processorCpuPercentage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/memoryAvailableBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "performanceCounters/processPrivateBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "requests/duration",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "requests/count",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "requests/rate",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "exceptions/browser",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "exceptions/server",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.insights/components",
+    "metricName": "traces/count",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "FunctionExecutionUnits",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites",
+    "metricName": "FunctionExecutionCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "SuccessfulRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "IncomingRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "IncomingMessages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "OutgoingMessages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ActiveConnections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ConnectionsOpened",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ConnectionsClosed",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "Size",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "Messages",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ActiveMessages",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ScheduledMessages",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "CompleteMessage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "PendingCheckpointOperationCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ServerSendLatency",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ReplicationLagDuration",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "ReplicationLagCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "IncomingBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.servicebus/namespaces",
+    "metricName": "OutgoingBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.automation/automationaccounts",
+    "metricName": "TotalUpdateDeploymentMachineRuns",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.automation/automationaccounts",
+    "metricName": "TotalUpdateDeploymentRuns",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.automation/automationaccounts",
+    "metricName": "HybridWorkerPing",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "CpuTime",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Requests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "BytesReceived",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "BytesSent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http101",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http2xx",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http3xx",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http401",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http403",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http404",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Http406",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "MemoryWorkingSet",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "AverageMemoryWorkingSet",
+    "reason": "Use percentage instead"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "AverageResponseTime",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "AppConnections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Handles",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Threads",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "PrivateBytes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoReadBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoWriteBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoOtherBytesPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoReadOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoWriteOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "IoOtherOperationsPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "RequestsInApplicationQueue",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "CurrentAssemblies",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "TotalAppDomains",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "TotalAppDomainsUnloaded",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Gen0Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Gen1Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "Gen2Collections",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.web/sites/slots",
+    "metricName": "FileSystemUsage",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/dnszones",
+    "metricName": "QueryVolume",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cdn/profiles",
+    "metricName": "RequestCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cdn/profiles",
+    "metricName": "ResponseSize",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cdn/profiles",
+    "metricName": "TotalLatency",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cdn/profiles",
+    "metricName": "ByteHitRatio",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/trafficmanagerprofiles",
+    "metricName": "QpsByEndpoint",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.recoveryservices/vaults",
+    "metricName": "BackupHealthEvent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.recoveryservices/vaults",
+    "metricName": "RestoreHealthEvent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "PublishSuccessCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "PublishSuccessLatencyInMs",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "AdvancedFilterEvaluationCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "MatchedEventCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "DeliverySuccessCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "DestinationProcessingDurationInMs",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.eventgrid/topics",
+    "metricName": "DroppedEventCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "ByteCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "PacketCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "SYNCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "SnatConnectionCount",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "AllocatedSnatPorts",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.network/loadbalancers",
+    "metricName": "UsedSnatPorts",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\DNS\\Total Query Received/sec",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\DNS\\Total Response Sent/sec",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\DirectoryServices(NTDS)\\LDAP Successful Binds/sec",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\Security System-Wide Statistics\\Kerberos Authentications",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\Security System-Wide Statistics\\NTLM Authentications",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.aad/domainservices",
+    "metricName": "\\DirectoryServices(NTDS)\\LDAP Searches/sec",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ModelRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TimeToResponse",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "NormalizedTimeBetweenTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TimeToLastByte",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "NormalizedTimeToFirstToken",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TokensPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "InputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "OutputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TotalTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TotalPages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AnnotatedPages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "GeneratedImages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "cacheReadInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ephemeral5mInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ephemeral1hInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TotalCalls",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAIRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAIAvailabilityRate",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "SuccessfulCalls",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "SuccessRate",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "DataIn",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "DataOut",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "Latency",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TotalTokenCalls",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "SynthesizedCharacters",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VideoSecondsSynthesized",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceModelTrainingMinutes",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceModelHostingHours",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AvatarModelTrainingSeconds",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AvatarModelHostingSeconds",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveAudioInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveAudioOutputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveTextInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveTextOutputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveCachedTextInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "VoiceLiveCachedAudioInputTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "OneDocumentCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "OneDocumentCustomCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TextCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TextCustomCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "DocumentCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "DocumentCustomCharactersTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TextTrainedCharacters",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TranslatorProAppSeconds",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsTranslated",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "SpeechModelHostingHours",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsTranscribed",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "SpeakerRecognitionTransactions",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "NumberofSpeakerProfiles",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "TokenTransaction",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ProcessedPromptTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioInputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioPromptTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "GeneratedTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioOutputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioCompletionTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ActiveTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "FineTunedTrainingHours",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ContentSafetyTextAnalyzeRequestCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "ContentSafetyImageAnalyzeRequestCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAIProvisionedManagedUtilization",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAIProvisionedManagedUtilizationV2",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAITimeToResponse",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAIContextTokensCacheMatchRate",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAINormalizedTTFTInMS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAINormalizedTBTInMS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAITokenPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AzureOpenAITTLTInMS",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RAITotalRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RAIHarmfulRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RAIRejectedRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RAIAbusiveUsersCount",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RAISystemEvent",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsBatchTranscribed",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsFastTranscribed",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsBatchWhisperTranscribed",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "AudioSecondsFastWhisperTranscribed",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts",
+    "metricName": "RealtimeUsageTime",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentEvents",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentInputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentMessages",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentOutputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentRuns",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentResponses",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentThreads",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentToolCalls",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AgentUsageIndexedFiles",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "ModelRequests",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "TimeToResponse",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "NormalizedTimeBetweenTokens",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "TimeToLastByte",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "NormalizedTimeToFirstToken",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "TokensPerSecond",
+    "reason": "Too granular"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "InputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "OutputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "TotalTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AudioInputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.cognitiveservices/accounts/projects",
+    "metricName": "AudioOutputTokens",
+    "reason": "Too verbose"
+  },
+  {
+    "resourceType": "microsoft.appconfiguration/configurationstores",
+    "metricName": "HttpIncomingRequestCount",
+    "reason": "Discovered from Poolcop - not critical for monitoring"
+  },
+  {
+    "resourceType": "microsoft.appconfiguration/configurationstores",
+    "metricName": "HttpIncomingRequestDuration",
+    "reason": "Discovered from Poolcop - not critical for monitoring"
+  },
+  {
+    "resourceType": "microsoft.appconfiguration/configurationstores",
+    "metricName": "ThrottledHttpRequestCount",
+    "reason": "Discovered from Poolcop - not critical for monitoring"
+  },
+  {
+    "resourceType": "microsoft.appconfiguration/configurationstores",
+    "metricName": "ReplicationLatency",
+    "reason": "Discovered from Poolcop - not critical for monitoring"
+  },
+  {
+    "resourceType": "microsoft.appconfiguration/configurationstores",
+    "metricName": "SnapshotStorageSize",
+    "reason": "Discovered from Poolcop - not critical for monitoring"
+  },
+  {
+    "resourceType": "microsoft.containerservice/managedclusters",
+    "metricName": "cluster_autoscaler_cluster_safe_to_autoscale",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.containerservice/managedclusters",
+    "metricName": "cluster_autoscaler_unneeded_nodes_count",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.containerservice/managedclusters",
+    "metricName": "kube_pod_status_phase",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.documentdb/databaseaccounts",
+    "metricName": "NormalizedRUConsumption",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.documentdb/databaseaccounts",
+    "metricName": "NormalizedRUConsumption",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.documentdb/databaseaccounts",
+    "metricName": "NormalizedRUConsumption",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.network/bastionhosts",
+    "metricName": "pingmesh",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.network/bastionhosts",
+    "metricName": "sessions",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.network/dnszones",
+    "metricName": "RecordSetCount",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  },
+  {
+    "resourceType": "microsoft.network/expressRouteCircuits",
+    "metricName": "BitsInPerSecond",
+    "reason": "Marked as AutoMitigate=No in global dictionary - moved to exclusions"
+  }
+]
