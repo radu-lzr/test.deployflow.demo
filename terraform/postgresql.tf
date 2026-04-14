@@ -2,12 +2,6 @@ resource "azurerm_private_dns_zone" "postgresql_zone" {
   name                = "privatelink.postgres.database.azure.com"
   resource_group_name = data.azurerm_resource_group.rg.name
   tags                = var.tags
-
-  # Computed attributes (read-only):
-  # max_number_of_record_sets                             = (computed)
-  # max_number_of_virtual_network_links                   = (computed)
-  # max_number_of_virtual_network_links_with_registration = (computed)
-  # number_of_record_sets                                 = (computed)
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "postgresql_zone_link" {
@@ -38,9 +32,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
     update = "60m"
     delete = "60m"
   }
-
-  # Computed attributes (read-only):
-  # fqdn = (computed)
 }
 
 resource "azurerm_postgresql_flexible_server_database" "odoo_db" {
