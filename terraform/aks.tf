@@ -22,10 +22,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
   identity {
     type = "SystemAssigned"
-
-    # Computed attributes (read-only):
-    # principal_id = (computed)
-    # tenant_id    = (computed)
   }
   network_profile {
     network_plugin    = var.aks_network_plugin
@@ -34,19 +30,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip    = var.aks_dns_service_ip
     load_balancer_sku = var.aks_load_balancer_sku
   }
-
-  # Computed attributes (read-only):
-  # current_kubernetes_version         = (computed)
-  # fqdn                               = (computed)
-  # http_application_routing_zone_name = (computed)
-  # kube_admin_config                  = (computed)
-  # kube_admin_config_raw              = (computed)
-  # kube_config                        = (computed)
-  # kube_config_raw                    = (computed)
-  # node_resource_group_id             = (computed)
-  # oidc_issuer_url                    = (computed)
-  # portal_fqdn                        = (computed)
-  # private_fqdn                       = (computed)
 
   lifecycle {
     ignore_changes = [
