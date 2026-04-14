@@ -50,7 +50,7 @@ jobs:
         run: |
           $inputDir = "${{ github.workspace }}/input"
           $outputDir = "${{ github.workspace }}/output"
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
 
           New-Item -ItemType Directory -Force -Path $inputDir | Out-Null
@@ -58,8 +58,8 @@ jobs:
 
           # If no discovery artifacts, check for local audit data
           if (-not (Test-Path "$inputDir/audit.csv")) {
-            if (Test-Path "$configDir/audit.csv") {
-              Copy-Item "$configDir/audit.csv" "$inputDir/audit.csv"
+            if (Test-Path "$monitoringDir/audit.csv") {
+              Copy-Item "$monitoringDir/audit.csv" "$inputDir/audit.csv"
             } else {
               Write-Error "No audit.csv found. Run monitoring-discovery workflow first or provide discovery_run_id."
               exit 1
@@ -69,15 +69,15 @@ jobs:
       - name: Merge dictionaries
         shell: pwsh
         run: |
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
           $outputDir = "${{ github.workspace }}/output"
 
           $dictionaryTypes = @("metrics", "activity-logs", "diagnostic-settings", "kql-queries")
 
           foreach ($type in $dictionaryTypes) {
-            $globalDict = "$configDir/dictionaries/${type}-dictionary.csv"
-            $overrideDict = "$configDir/overrides/${type}-overrides.csv"
+            $globalDict = "$monitoringDir/dictionaries/${type}-dictionary.csv"
+            $overrideDict = "$monitoringDir/overrides/${type}-overrides.csv"
             $mergedOutput = "$outputDir/${type}-merged.csv"
 
             if (Test-Path $globalDict) {
@@ -100,10 +100,10 @@ jobs:
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
           $inputDir = "${{ github.workspace }}/input"
           $outputDir = "${{ github.workspace }}/output"
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
 
           $excludeMetrics = @()
-          $excludePath = "$configDir/exclusions/exclude-metrics.json"
+          $excludePath = "$monitoringDir/exclusions/exclude-metrics.json"
           if (Test-Path $excludePath) {
             $excludeMetrics = Get-Content $excludePath | ConvertFrom-Json
           }
@@ -146,10 +146,10 @@ jobs:
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
           $inputDir = "${{ github.workspace }}/input"
           $outputDir = "${{ github.workspace }}/output"
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
 
           $excludeDiag = @()
-          $excludePath = "$configDir/exclusions/exclude-diagsettings.json"
+          $excludePath = "$monitoringDir/exclusions/exclude-diagsettings.json"
           if (Test-Path $excludePath) {
             $excludeDiag = Get-Content $excludePath | ConvertFrom-Json
           }
