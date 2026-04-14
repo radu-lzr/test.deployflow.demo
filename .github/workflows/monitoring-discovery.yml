@@ -7,15 +7,6 @@ on:
         description: "Target environment (dev, prod, etc.)"
         required: true
         type: string
-      subscriptions:
-        description: "Comma-separated subscription IDs, or 'auto' to discover all"
-        required: true
-        type: string
-        default: "auto"
-      tenant_id:
-        description: "Azure tenant ID"
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -67,46 +58,38 @@ jobs:
         id: subs
         shell: pwsh
         run: |
-          $tenantId = "${{ inputs.tenant_id }}"
-          $subsInput = "${{ inputs.subscriptions }}"
           $outputDir = "${{ github.workspace }}/output"
           New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 
-          if ($subsInput -eq "auto") {
-            Write-Host "Auto-discovering subscriptions for tenant $tenantId..."
-            $subscriptions = Get-AzSubscription -TenantId $tenantId | Where-Object { $_.State -eq "Enabled" }
-            $subIds = ($subscriptions | ForEach-Object { $_.SubscriptionId }) -join ","
-            $subscriptions | Select-Object Name, SubscriptionId, State, TenantId |
-              Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
-          } else {
-            $subIds = $subsInput
-            $subList = $subsInput -split ","
-            $rows = @()
-            foreach ($sid in $subList) {
-              $sub = Get-AzSubscription -SubscriptionId $sid.Trim()
-              $rows += [PSCustomObject]@{
-                Name = $sub.Name
-                SubscriptionId = $sub.SubscriptionId
-                State = $sub.State
-                TenantId = $sub.TenantId
-              }
-            }
-            $rows | Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
-          }
-          echo "subscription_ids=$subIds" >> $env:GITHUB_OUTPUT
-          Write-Host "Discovered subscriptions: $subIds"
+          # Use the subscription from the ARM secret (already authenticated)
+          $context = Get-AzContext
+          $subId = $context.Subscription.Id
+          $tenantId = $context.Tenant.Id
+
+          Write-Host "Using subscription from secrets: $subId (tenant: $tenantId)"
+
+          $sub = Get-AzSubscription -SubscriptionId $subId
+          [PSCustomObject]@{
+              Name           = $sub.Name
+              SubscriptionId = $sub.SubscriptionId
+              State          = $sub.State
+              TenantId       = $sub.TenantId
+          } | Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
+
+          echo "subscription_ids=$subId" >> $env:GITHUB_OUTPUT
+          Write-Host "Discovered subscriptions: $subId"
 
       - name: Run audit report
         shell: pwsh
         run: |
           $outputDir = "${{ github.workspace }}/output"
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
           $subIds = "${{ steps.subs.outputs.subscription_ids }}" -split ","
 
           # Load exclusions
           $excludeResources = @()
-          $excludeResourcesPath = "$configDir/exclusions/exclude-resources.json"
+          $excludeResourcesPath = "$monitoringDir/exclusions/exclude-resources.json"
           if (Test-Path $excludeResourcesPath) {
             $excludeResources = Get-Content $excludeResourcesPath | ConvertFrom-Json
           }
@@ -121,15 +104,15 @@ jobs:
         run: |
           $outputDir = "${{ github.workspace }}/output"
           $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
-          $configDir = "${{ github.workspace }}/monitoring/config"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
 
-          $excludeMetricsPath = "$configDir/exclusions/exclude-metrics.json"
+          $excludeMetricsPath = "$monitoringDir/exclusions/exclude-metrics.json"
           $excludeMetrics = @()
           if (Test-Path $excludeMetricsPath) {
             $excludeMetrics = Get-Content $excludeMetricsPath | ConvertFrom-Json
           }
 
-          $dictionaryPath = "$configDir/dictionaries/metrics-dictionary.csv"
+          $dictionaryPath = "$monitoringDir/dictionaries/metrics-dictionary.csv"
 
           & "$scriptsDir/discovery/Discover-Metrics.ps1" `
             -AuditCsvPath "$outputDir/audit.csv" `
