@@ -1,52 +1,33 @@
 # Generate-AuditReport.ps1
-# Script pour generer un audit des ressources Azure et creer le fichier audit.csv
+# Standalone audit script — discovers Azure resources across subscriptions
+# and produces audit.csv / audit-full.csv in the specified output directory.
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$ClientName,
-    
+    [string[]]$SubscriptionIds,
+
     [Parameter(Mandatory=$true)]
-    [string]$Environment
+    [string]$OutputDir,
+
+    [Parameter(Mandatory=$false)]
+    [string[]]$ExcludeResourceTypes = @()
 )
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "AUDIT DES RESSOURCES AZURE - $ClientName" -ForegroundColor Cyan
-Write-Host "============================================================" -ForegroundColor Cyan
-
-# Chemins
-$clientPath = "$PSScriptRoot/../../Clients/$ClientName"
-$envConfigPath = "$clientPath/Config/$Environment/environment-config.json"
-$auditOutputPath = "$clientPath/Config/$Environment/audit.csv"
-$auditFullOutputPath = "$clientPath/Config/$Environment/audit-full.csv"
-
-# Verifier que la configuration existe
-if (-not (Test-Path $envConfigPath)) {
-    Write-Host "ERROR: Configuration introuvable: $envConfigPath" -ForegroundColor Red
-    exit 1
+# Ensure output directory exists
+if (-not (Test-Path $OutputDir)) {
+    New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
 }
 
-# Charger la configuration
-Write-Host "`nChargement de la configuration..." -ForegroundColor Yellow
-$envConfig = Get-Content -Path $envConfigPath -Raw | ConvertFrom-Json
+$auditOutputPath = "$OutputDir/audit.csv"
+$auditFullOutputPath = "$OutputDir/audit-full.csv"
 
-# Recuperer les subscriptions a auditer
-$subscriptions = $envConfig.subscriptions
-if (-not $subscriptions -or $subscriptions.Count -eq 0) {
-    Write-Host "`nERROR: Aucune subscription trouvee dans la configuration" -ForegroundColor Red
-    Write-Host "`nPREREQUIS MANQUANT:" -ForegroundColor Yellow
-    Write-Host "  Vous devez d'abord executer la Pipeline 2: Discover-Subscriptions" -ForegroundColor White
-    Write-Host "  Cette pipeline decouvre les subscriptions et met a jour environment-config.json" -ForegroundColor White
-    Write-Host "`nETAPES A SUIVRE:" -ForegroundColor Cyan
-    Write-Host "  1. Executer Pipeline: Discover-Subscriptions" -ForegroundColor White
-    Write-Host "     - clientName: $ClientName" -ForegroundColor Gray
-    Write-Host "     - environment: $Environment" -ForegroundColor Gray
-    Write-Host "  2. Verifier que subscriptions.csv est cree" -ForegroundColor White
-    Write-Host "  3. Relancer cette pipeline (Audit)" -ForegroundColor White
-    exit 1
-}
+Write-Host "============================================================" -ForegroundColor Cyan
+Write-Host "AUDIT DES RESSOURCES AZURE" -ForegroundColor Cyan
+Write-Host "============================================================" -ForegroundColor Cyan
 
+$subscriptions = $SubscriptionIds
 Write-Host "OK Subscriptions a auditer: $($subscriptions.Count)" -ForegroundColor Green
 foreach ($subId in $subscriptions) {
     Write-Host "  - $subId" -ForegroundColor Gray
@@ -61,7 +42,7 @@ $vmExtensionsResults = @()
 $dcrResults = @()
 $vmMonitoringResults = @()  # VMs pour vm-monitoring-matrix.csv
 
-# Types de ressources a auditer (liste de base)
+# Types de ressources a auditer (types courants pour monitoring)
 $resourceTypesToAudit = @(
     'Microsoft.Compute/virtualMachines',
     'Microsoft.Storage/storageAccounts',
@@ -82,6 +63,12 @@ $resourceTypesToAudit = @(
     'Microsoft.Logic/workflows',
     'Microsoft.Automation/automationAccounts'
 )
+
+# Remove excluded types
+if ($ExcludeResourceTypes.Count -gt 0) {
+    $resourceTypesToAudit = $resourceTypesToAudit | Where-Object { $_ -notin $ExcludeResourceTypes }
+    Write-Host "Excluded $($ExcludeResourceTypes.Count) resource type(s)" -ForegroundColor Yellow
+}
 
 Write-Host "`nDebut de l'audit des ressources..." -ForegroundColor Cyan
 
@@ -316,35 +303,35 @@ if ($auditFullResults.Count -eq 0) {
 }
 
 # Exporter les Diagnostic Settings
-$diagSettingsPath = "$clientPath/Config/$Environment/diagnostic-settings.csv"
+$diagSettingsPath = "$OutputDir/diagnostic-settings.csv"
 if ($diagnosticSettingsResults.Count -gt 0) {
     $diagnosticSettingsResults | Export-Csv -Path $diagSettingsPath -NoTypeInformation -Encoding UTF8
     Write-Host "OK Diagnostic Settings exportes: $diagSettingsPath ($($diagnosticSettingsResults.Count))" -ForegroundColor Green
 }
 
 # Exporter les Alertes
-$alertsPath = "$clientPath/Config/$Environment/alerts.csv"
+$alertsPath = "$OutputDir/alerts.csv"
 if ($alertsResults.Count -gt 0) {
     $alertsResults | Export-Csv -Path $alertsPath -NoTypeInformation -Encoding UTF8
     Write-Host "OK Alertes exportees: $alertsPath ($($alertsResults.Count))" -ForegroundColor Green
 }
 
 # Exporter les Extensions VM
-$vmExtensionsPath = "$clientPath/Config/$Environment/vm-extensions.csv"
+$vmExtensionsPath = "$OutputDir/vm-extensions.csv"
 if ($vmExtensionsResults.Count -gt 0) {
     $vmExtensionsResults | Export-Csv -Path $vmExtensionsPath -NoTypeInformation -Encoding UTF8
     Write-Host "OK Extensions VM exportees: $vmExtensionsPath ($($vmExtensionsResults.Count))" -ForegroundColor Green
 }
 
 # Exporter les Data Collection Rules
-$dcrPath = "$clientPath/Config/$Environment/data-collection-rules.csv"
+$dcrPath = "$OutputDir/data-collection-rules.csv"
 if ($dcrResults.Count -gt 0) {
     $dcrResults | Export-Csv -Path $dcrPath -NoTypeInformation -Encoding UTF8
     Write-Host "OK Data Collection Rules exportees: $dcrPath ($($dcrResults.Count))" -ForegroundColor Green
 }
 
 # Exporter le fichier vm-monitoring-matrix.csv directement dans Matrices/Dev
-$matricesPath = "$clientPath/Matrices/$Environment"
+$matricesPath = $OutputDir
 if (-not (Test-Path $matricesPath)) {
     New-Item -ItemType Directory -Path $matricesPath -Force | Out-Null
 }
