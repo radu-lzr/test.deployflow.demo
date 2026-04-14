@@ -17,6 +17,7 @@ destination_branches:
   # Monitoring (added by bootstrap)
   - "monitor-dev"
   - "monitor-prod"
+  - "monitor-poc"
 
 engine:
   name: "terraform"
