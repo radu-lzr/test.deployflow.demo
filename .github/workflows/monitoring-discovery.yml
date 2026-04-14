@@ -45,6 +45,7 @@ jobs:
               "tenantId": "${{ secrets[format('{0}_ARM_TENANT_ID', steps.creds.outputs.prefix)] }}",
               "subscriptionId": "${{ secrets[format('{0}_ARM_SUBSCRIPTION_ID', steps.creds.outputs.prefix)] }}"
             }
+          enable-AzPSSession: true
 
       - name: Install Azure PowerShell modules
         shell: pwsh
