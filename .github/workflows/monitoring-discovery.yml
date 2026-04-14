@@ -1,0 +1,159 @@
+name: "Monitoring — Azure Resource Discovery"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (dev, prod, etc.)"
+        required: true
+        type: string
+      subscriptions:
+        description: "Comma-separated subscription IDs, or 'auto' to discover all"
+        required: true
+        type: string
+        default: "auto"
+      tenant_id:
+        description: "Azure tenant ID"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    name: Discover Azure Resources
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Azure credentials
+        id: creds
+        shell: bash
+        run: |
+          ENV_UPPER=$(echo "${{ inputs.environment }}" | tr '[:lower:]' '[:upper:]')
+          echo "prefix=${ENV_UPPER}" >> "$GITHUB_OUTPUT"
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets[format('{0}_ARM_CLIENT_ID', steps.creds.outputs.prefix)] }}",
+              "clientSecret": "${{ secrets[format('{0}_ARM_CLIENT_SECRET', steps.creds.outputs.prefix)] }}",
+              "tenantId": "${{ secrets[format('{0}_ARM_TENANT_ID', steps.creds.outputs.prefix)] }}",
+              "subscriptionId": "${{ secrets[format('{0}_ARM_SUBSCRIPTION_ID', steps.creds.outputs.prefix)] }}"
+            }
+
+      - name: Install Azure PowerShell modules
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable -Name Az.Accounts)) {
+            Install-Module -Name Az.Accounts -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Resources)) {
+            Install-Module -Name Az.Resources -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Monitor)) {
+            Install-Module -Name Az.Monitor -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Compute)) {
+            Install-Module -Name Az.Compute -Force -Scope CurrentUser -AllowClobber
+          }
+
+      - name: Discover subscriptions
+        id: subs
+        shell: pwsh
+        run: |
+          $tenantId = "${{ inputs.tenant_id }}"
+          $subsInput = "${{ inputs.subscriptions }}"
+          $outputDir = "${{ github.workspace }}/output"
+          New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
+
+          if ($subsInput -eq "auto") {
+            Write-Host "Auto-discovering subscriptions for tenant $tenantId..."
+            $subscriptions = Get-AzSubscription -TenantId $tenantId | Where-Object { $_.State -eq "Enabled" }
+            $subIds = ($subscriptions | ForEach-Object { $_.SubscriptionId }) -join ","
+            $subscriptions | Select-Object Name, SubscriptionId, State, TenantId |
+              Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
+          } else {
+            $subIds = $subsInput
+            $subList = $subsInput -split ","
+            $rows = @()
+            foreach ($sid in $subList) {
+              $sub = Get-AzSubscription -SubscriptionId $sid.Trim()
+              $rows += [PSCustomObject]@{
+                Name = $sub.Name
+                SubscriptionId = $sub.SubscriptionId
+                State = $sub.State
+                TenantId = $sub.TenantId
+              }
+            }
+            $rows | Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
+          }
+          echo "subscription_ids=$subIds" >> $env:GITHUB_OUTPUT
+          Write-Host "Discovered subscriptions: $subIds"
+
+      - name: Run audit report
+        shell: pwsh
+        run: |
+          $outputDir = "${{ github.workspace }}/output"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $configDir = "${{ github.workspace }}/monitoring/config"
+          $subIds = "${{ steps.subs.outputs.subscription_ids }}" -split ","
+
+          # Load exclusions
+          $excludeResources = @()
+          $excludeResourcesPath = "$configDir/exclusions/exclude-resources.json"
+          if (Test-Path $excludeResourcesPath) {
+            $excludeResources = Get-Content $excludeResourcesPath | ConvertFrom-Json
+          }
+
+          & "$scriptsDir/audit/Generate-AuditReport.ps1" `
+            -SubscriptionIds $subIds `
+            -OutputDir $outputDir `
+            -ExcludeResourceTypes $excludeResources
+
+      - name: Run metric discovery for unknown types
+        shell: pwsh
+        run: |
+          $outputDir = "${{ github.workspace }}/output"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $configDir = "${{ github.workspace }}/monitoring/config"
+
+          $excludeMetricsPath = "$configDir/exclusions/exclude-metrics.json"
+          $excludeMetrics = @()
+          if (Test-Path $excludeMetricsPath) {
+            $excludeMetrics = Get-Content $excludeMetricsPath | ConvertFrom-Json
+          }
+
+          $dictionaryPath = "$configDir/dictionaries/metrics-dictionary.csv"
+
+          & "$scriptsDir/discovery/Discover-Metrics.ps1" `
+            -AuditCsvPath "$outputDir/audit.csv" `
+            -DictionaryPath $dictionaryPath `
+            -ExcludeMetrics $excludeMetrics `
+            -OutputDir $outputDir
+
+      - name: Upload discovery results
+        uses: actions/upload-artifact@v4
+        with:
+          name: discovery-results
+          path: |
+            ${{ github.workspace }}/output/audit.csv
+            ${{ github.workspace }}/output/audit-full.csv
+            ${{ github.workspace }}/output/subscriptions.csv
+          retention-days: 30
+
+      - name: Upload existing monitoring state
+        uses: actions/upload-artifact@v4
+        with:
+          name: existing-monitoring
+          path: |
+            ${{ github.workspace }}/output/diagnostic-settings.csv
+            ${{ github.workspace }}/output/alerts.csv
+            ${{ github.workspace }}/output/vm-extensions.csv
+            ${{ github.workspace }}/output/data-collection-rules.csv
+          retention-days: 30
+          if-no-files-found: ignore
