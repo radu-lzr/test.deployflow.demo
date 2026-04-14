@@ -4,18 +4,18 @@ variable "environment" {
 }
 
 variable "location" {
-  description = "Azure region for monitoring resources"
+  description = "Azure region"
   type        = string
   default     = "francecentral"
 }
 
 variable "resource_group_name" {
-  description = "Name of the monitoring resource group"
+  description = "Resource group for monitoring resources (action groups, etc.)"
   type        = string
 }
 
 variable "log_analytics_workspace_name" {
-  description = "Name of the Log Analytics Workspace"
+  description = "Log Analytics Workspace name"
   type        = string
 }
 
@@ -25,8 +25,44 @@ variable "action_group_prefix" {
   default     = "ag"
 }
 
-variable "monitored_resources" {
-  description = "Map of resource keys to Azure resource IDs, populated from discovery workflow artifacts"
-  type        = map(string)
-  default     = {}
+variable "metric_alerts" {
+  description = "Map of metric alert definitions (auto-generated from matrix)"
+  type = map(object({
+    alert_name           = string
+    resource_id          = string
+    metric_namespace     = string
+    metric_name          = string
+    operator             = string
+    aggregation          = string
+    threshold            = number
+    severity             = number
+    evaluation_frequency = string
+    window_size          = string
+    description          = string
+  }))
+  default = {}
+}
+
+variable "activity_log_alerts" {
+  description = "Map of activity log alert definitions (auto-generated from matrix)"
+  type = map(object({
+    alert_name     = string
+    resource_id    = string
+    operation_name = string
+    category       = string
+    status         = string
+    description    = string
+  }))
+  default = {}
+}
+
+variable "diagnostic_settings" {
+  description = "Map of diagnostic settings (auto-generated from matrix)"
+  type = map(object({
+    setting_name    = string
+    resource_id     = string
+    log_category    = string
+    metric_category = string
+  }))
+  default = {}
 }
