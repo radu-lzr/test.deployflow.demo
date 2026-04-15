@@ -3,7 +3,6 @@
 "microsoft.compute/virtualmachines","Microsoft-Syslog","","Yes","30","vm"
 "microsoft.compute/virtualmachinescalesets","Microsoft-Event","","Yes","30","vmss"
 "microsoft.compute/virtualmachinescalesets","Microsoft-Syslog","","Yes","30","vmss"
-"microsoft.storage/storageaccounts","StorageDelete","","Yes","30","storage"
 "microsoft.storage/storageaccounts/blobservices","StorageDelete","","Yes","30","storage-blob"
 "microsoft.storage/storageaccounts/fileservices","StorageDelete","","Yes","30","storage-file"
 "microsoft.storage/storageaccounts/queueservices","StorageDelete","","Yes","30","storage-queue"
