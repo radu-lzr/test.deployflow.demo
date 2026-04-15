@@ -8,9 +8,9 @@ tags:
     main: "^main$"
     dev: "^develop$"
     poc: "^poc$"
-    monitor-dev: "^monitor-dev$"
-    monitor-poc: "^monitor-poc$"
-    monitor-prod: "^monitor-prod$"
+    monitor_dev: "^monitor-dev$"
+    monitor_poc: "^monitor-poc$"
+    monitor_prod: "^monitor-prod$"
 
 dirs:
   "terraform":
