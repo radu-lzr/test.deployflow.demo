@@ -3,6 +3,15 @@
 # ── Infrastructure section is managed dynamically by DeployFlow at deploy time.
 # ── Monitoring section is written once at bootstrap and not regenerated per deploy.
 
+tags:
+  dest_branch:
+    main: "^main$"
+    dev: "^develop$"
+    poc: "^poc$"
+    monitor-dev: "^monitor-dev$"
+    monitor-poc: "^monitor-poc$"
+    monitor-prod: "^monitor-prod$"
+
 dirs:
   "terraform":
     tags: ["deployflow"]
@@ -13,7 +22,7 @@ destination_branches:
   # Infrastructure (managed by DeployFlow deploy)
   - "main"
   - "poc"
-  - "dev"
+  - "develop"
   # Monitoring (added by bootstrap)
   - "monitor-dev"
   - "monitor-prod"
