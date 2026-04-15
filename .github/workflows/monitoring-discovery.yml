@@ -1,0 +1,143 @@
+name: "Monitoring — Azure Resource Discovery"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (dev, prod, etc.)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    name: Discover Azure Resources
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Azure credentials
+        id: creds
+        shell: bash
+        run: |
+          ENV_UPPER=$(echo "${{ inputs.environment }}" | tr '[:lower:]' '[:upper:]')
+          echo "prefix=${ENV_UPPER}" >> "$GITHUB_OUTPUT"
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets[format('{0}_ARM_CLIENT_ID', steps.creds.outputs.prefix)] }}",
+              "clientSecret": "${{ secrets[format('{0}_ARM_CLIENT_SECRET', steps.creds.outputs.prefix)] }}",
+              "tenantId": "${{ secrets[format('{0}_ARM_TENANT_ID', steps.creds.outputs.prefix)] }}",
+              "subscriptionId": "${{ secrets[format('{0}_ARM_SUBSCRIPTION_ID', steps.creds.outputs.prefix)] }}"
+            }
+          enable-AzPSSession: true
+
+      - name: Install Azure PowerShell modules
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable -Name Az.Accounts)) {
+            Install-Module -Name Az.Accounts -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Resources)) {
+            Install-Module -Name Az.Resources -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Monitor)) {
+            Install-Module -Name Az.Monitor -Force -Scope CurrentUser -AllowClobber
+          }
+          if (-not (Get-Module -ListAvailable -Name Az.Compute)) {
+            Install-Module -Name Az.Compute -Force -Scope CurrentUser -AllowClobber
+          }
+
+      - name: Discover subscriptions
+        id: subs
+        shell: pwsh
+        run: |
+          $outputDir = "${{ github.workspace }}/output"
+          New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
+
+          # Use the subscription from the ARM secret (already authenticated)
+          $context = Get-AzContext
+          $subId = $context.Subscription.Id
+          $tenantId = $context.Tenant.Id
+
+          Write-Host "Using subscription from secrets: $subId (tenant: $tenantId)"
+
+          $sub = Get-AzSubscription -SubscriptionId $subId
+          [PSCustomObject]@{
+              Name           = $sub.Name
+              SubscriptionId = $sub.SubscriptionId
+              State          = $sub.State
+              TenantId       = $sub.TenantId
+          } | Export-Csv -Path "$outputDir/subscriptions.csv" -NoTypeInformation -Delimiter ";"
+
+          echo "subscription_ids=$subId" >> $env:GITHUB_OUTPUT
+          Write-Host "Discovered subscriptions: $subId"
+
+      - name: Run audit report
+        shell: pwsh
+        run: |
+          $outputDir = "${{ github.workspace }}/output"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+          $subIds = "${{ steps.subs.outputs.subscription_ids }}" -split ","
+
+          # Load exclusions
+          $excludeResources = @()
+          $excludeResourcesPath = "$monitoringDir/exclusions/exclude-resources.json"
+          if (Test-Path $excludeResourcesPath) {
+            $excludeResources = Get-Content $excludeResourcesPath | ConvertFrom-Json
+          }
+
+          & "$scriptsDir/audit/Generate-AuditReport.ps1" `
+            -SubscriptionIds $subIds `
+            -OutputDir $outputDir `
+            -ExcludeResourceTypes $excludeResources
+
+      - name: Run metric discovery for unknown types
+        shell: pwsh
+        run: |
+          $outputDir = "${{ github.workspace }}/output"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+
+          $excludeMetricsPath = "$monitoringDir/exclusions/exclude-metrics.json"
+          $excludeMetrics = @()
+          if (Test-Path $excludeMetricsPath) {
+            $excludeMetrics = Get-Content $excludeMetricsPath | ConvertFrom-Json
+          }
+
+          $dictionaryPath = "$monitoringDir/dictionaries/metrics-dictionary.csv"
+
+          & "$scriptsDir/discovery/Discover-Metrics.ps1" `
+            -AuditCsvPath "$outputDir/audit.csv" `
+            -DictionaryPath $dictionaryPath `
+            -ExcludeMetrics $excludeMetrics `
+            -OutputDir $outputDir
+
+      - name: Upload discovery results
+        uses: actions/upload-artifact@v4
+        with:
+          name: discovery-results
+          path: |
+            ${{ github.workspace }}/output/audit.csv
+            ${{ github.workspace }}/output/audit-full.csv
+            ${{ github.workspace }}/output/subscriptions.csv
+          retention-days: 30
+
+      - name: Upload existing monitoring state
+        uses: actions/upload-artifact@v4
+        with:
+          name: existing-monitoring
+          path: |
+            ${{ github.workspace }}/output/diagnostic-settings.csv
+            ${{ github.workspace }}/output/alerts.csv
+            ${{ github.workspace }}/output/vm-extensions.csv
+            ${{ github.workspace }}/output/data-collection-rules.csv
+          retention-days: 30
+          if-no-files-found: ignore
