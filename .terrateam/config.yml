@@ -31,7 +31,3 @@ destination_branches:
 engine:
   name: "terraform"
   version: "1.14.5"
-
-# ── Infrastructure workflows are injected dynamically by GenerateTerrateamConfigContent() ──
-# ── The app appends per-env workflow blocks with tag_query "deployflow and dest_branch:{env}" ──
-workflows: []
