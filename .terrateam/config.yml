@@ -16,7 +16,7 @@ engine:
   version: "1.14.5"
 
 workflows:
-  - tag_query: "monitoring and dest_branch:monitor-poc"
+  - tag_query: "monitoring"
     plan:
       - type: env
         name: ARM_TENANT_ID
