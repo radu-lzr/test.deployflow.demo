@@ -1,0 +1,199 @@
+name: "Monitoring — Audit & Matrix Generation"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (dev, prod, etc.)"
+        required: true
+        type: string
+      client_name:
+        description: "Client name for override resolution"
+        required: true
+        type: string
+      discovery_run_id:
+        description: "Workflow run ID to download discovery artifacts from (leave empty to use repo config)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  generate-matrices:
+    name: Generate Monitoring Matrices
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Azure PowerShell modules
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable -Name Az.Accounts)) {
+            Install-Module -Name Az.Accounts -Force -Scope CurrentUser -AllowClobber
+          }
+
+      - name: Download discovery artifacts
+        if: inputs.discovery_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: discovery-results
+          path: ${{ github.workspace }}/input
+          run-id: ${{ inputs.discovery_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare input directories
+        shell: pwsh
+        run: |
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+
+          New-Item -ItemType Directory -Force -Path $inputDir | Out-Null
+          New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
+
+          # If no discovery artifacts, check for local audit data
+          if (-not (Test-Path "$inputDir/audit.csv")) {
+            if (Test-Path "$monitoringDir/audit.csv") {
+              Copy-Item "$monitoringDir/audit.csv" "$inputDir/audit.csv"
+            } else {
+              Write-Error "No audit.csv found. Run monitoring-discovery workflow first or provide discovery_run_id."
+              exit 1
+            }
+          }
+
+      - name: Merge dictionaries
+        shell: pwsh
+        run: |
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $outputDir = "${{ github.workspace }}/output"
+
+          $dictionaryTypes = @("metrics", "activity-logs", "diagnostic-settings", "kql-queries")
+
+          foreach ($type in $dictionaryTypes) {
+            $globalDict = "$monitoringDir/dictionaries/${type}-dictionary.csv"
+            $overrideDict = "$monitoringDir/overrides/${type}-overrides.csv"
+            $mergedOutput = "$outputDir/${type}-merged.csv"
+
+            if (Test-Path $globalDict) {
+              $params = @{
+                GlobalDictionaryPath = $globalDict
+                OutputPath = $mergedOutput
+              }
+              if (Test-Path $overrideDict) {
+                $params["OverridePath"] = $overrideDict
+              }
+              & "$scriptsDir/utilities/Merge-Dictionaries.ps1" @params
+            } else {
+              Write-Warning "Global dictionary not found: $globalDict"
+            }
+          }
+
+      - name: Generate metrics matrix
+        shell: pwsh
+        run: |
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+
+          $excludeMetrics = @()
+          $excludePath = "$monitoringDir/exclusions/exclude-metrics.json"
+          if (Test-Path $excludePath) {
+            $excludeMetrics = Get-Content $excludePath | ConvertFrom-Json
+          }
+
+          & "$scriptsDir/generation/Generate-MetricsMatrix.ps1" `
+            -AuditCsvPath "$inputDir/audit.csv" `
+            -DictionaryPath "$outputDir/metrics-merged.csv" `
+            -ExcludeMetrics $excludeMetrics `
+            -OutputPath "$outputDir/metrics-matrix.csv" `
+            -SuggestionsPath "$outputDir/suggestions-metrics.csv"
+
+      - name: Generate KQL matrix
+        shell: pwsh
+        run: |
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+
+          & "$scriptsDir/generation/Generate-KQLMatrix.ps1" `
+            -AuditCsvPath "$inputDir/audit.csv" `
+            -DictionaryPath "$outputDir/kql-queries-merged.csv" `
+            -OutputPath "$outputDir/kql-matrix.csv"
+
+      - name: Generate activity logs matrix
+        shell: pwsh
+        run: |
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+
+          & "$scriptsDir/generation/Generate-ActivityLogsMatrix.ps1" `
+            -AuditCsvPath "$inputDir/audit.csv" `
+            -DictionaryPath "$outputDir/activity-logs-merged.csv" `
+            -OutputPath "$outputDir/activitylogs-matrix.csv" `
+            -SuggestionsPath "$outputDir/suggestions-activitylogs.csv"
+
+      - name: Generate diagnostic settings matrix
+        shell: pwsh
+        run: |
+          $scriptsDir = "${{ github.workspace }}/monitoring/scripts"
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+          $monitoringDir = "${{ github.workspace }}/monitoring"
+
+          $excludeDiag = @()
+          $excludePath = "$monitoringDir/exclusions/exclude-diagsettings.json"
+          if (Test-Path $excludePath) {
+            $excludeDiag = Get-Content $excludePath | ConvertFrom-Json
+          }
+
+          & "$scriptsDir/generation/Generate-DiagnosticSettingsMatrix.ps1" `
+            -AuditCsvPath "$inputDir/audit.csv" `
+            -DictionaryPath "$outputDir/diagnostic-settings-merged.csv" `
+            -ExcludeDiagSettings $excludeDiag `
+            -OutputPath "$outputDir/diagsettings-matrix.csv" `
+            -SuggestionsPath "$outputDir/suggestions-diagsettings.csv"
+
+      - name: Generate VM monitoring matrix
+        shell: pwsh
+        run: |
+          $inputDir = "${{ github.workspace }}/input"
+          $outputDir = "${{ github.workspace }}/output"
+
+          # Extract VM monitoring candidates from audit data
+          if (Test-Path "$inputDir/audit.csv") {
+            $audit = Import-Csv "$inputDir/audit.csv" -Delimiter ";"
+            $vms = $audit | Where-Object { $_.ResourceType -like "Microsoft.Compute/virtualMachines*" }
+            if ($vms) {
+              $vms | Export-Csv "$outputDir/vm-monitoring-matrix.csv" -NoTypeInformation -Delimiter ";"
+            }
+          }
+
+      - name: Upload monitoring matrices
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-matrices
+          path: |
+            ${{ github.workspace }}/output/metrics-matrix.csv
+            ${{ github.workspace }}/output/kql-matrix.csv
+            ${{ github.workspace }}/output/activitylogs-matrix.csv
+            ${{ github.workspace }}/output/diagsettings-matrix.csv
+            ${{ github.workspace }}/output/vm-monitoring-matrix.csv
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Upload suggestions
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-suggestions
+          path: |
+            ${{ github.workspace }}/output/suggestions-*.csv
+          retention-days: 30
+          if-no-files-found: ignore
