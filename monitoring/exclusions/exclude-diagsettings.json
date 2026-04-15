@@ -1,0 +1,547 @@
+[
+    {
+        "resourceType": "microsoft.compute/virtualmachines",
+        "category": "NetworkSecurityGroupEvent",
+        "reason": "Verbose logging, not critical"
+    },
+    {
+        "resourceType": "microsoft.compute/virtualmachines",
+        "category": "NetworkSecurityGroupRuleCounter",
+        "reason": "Verbose logging, not critical"
+    },
+    {
+        "resourceType": "*",
+        "category": "AuditEvent",
+        "reason": "Too verbose, use Activity Logs instead"
+    },
+    {
+        "resourceType": "*",
+        "category": "Recommendation",
+        "reason": "Advisor recommendations, not monitoring"
+    },
+    {
+        "resourceType": "*",
+        "category": "Security",
+        "reason": "Use Azure Security Center instead"
+    },
+    {
+        "resourceType": "microsoft.compute/virtualmachines",
+        "category": "Microsoft-Perf",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.compute/virtualmachines",
+        "category": "Microsoft-ProtectionStatus",
+        "reason": "Not critical for monitoring"
+    },
+    {
+        "resourceType": "microsoft.compute/virtualmachinescalesets",
+        "category": "Microsoft-Perf",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts",
+        "category": "StorageRead",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts",
+        "category": "StorageWrite",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/blobservices",
+        "category": "StorageRead",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/blobservices",
+        "category": "StorageWrite",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/fileservices",
+        "category": "StorageRead",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/fileservices",
+        "category": "StorageWrite",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/queueservices",
+        "category": "StorageRead",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/queueservices",
+        "category": "StorageWrite",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/tableservices",
+        "category": "StorageRead",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.storage/storageaccounts/tableservices",
+        "category": "StorageWrite",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.sql/servers/databases",
+        "category": "SQLInsights",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.sql/servers/databases",
+        "category": "AutomaticTuning",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.sql/servers/databases",
+        "category": "QueryStoreRuntimeStatistics",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.sql/servers/databases",
+        "category": "QueryStoreWaitStatistics",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.sql/servers/databases",
+        "category": "DatabaseWaitStatistics",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.web/sites",
+        "category": "AppServiceIPSecAuditLogs",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.web/sites",
+        "category": "AppServicePlatformLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.containerservice/managedclusters",
+        "category": "kube-scheduler",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.containerservice/managedclusters",
+        "category": "guard",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.network/publicipaddresses",
+        "category": "DDoSProtectionNotifications",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.network/publicipaddresses",
+        "category": "DDoSMitigationFlowLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/publicipaddresses",
+        "category": "DDoSMitigationReports",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/loadbalancers",
+        "category": "LoadBalancerAlertEvent",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.network/loadbalancers",
+        "category": "LoadBalancerProbeHealthStatus",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/applicationgateways",
+        "category": "ApplicationGatewayPerformanceLog",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.keyvault/vaults",
+        "category": "AzurePolicyEvaluationDetails",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.eventhub/namespaces",
+        "category": "ArchiveLogs",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.eventhub/namespaces",
+        "category": "AutoScaleLogs",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.servicebus/namespaces",
+        "category": "VNetAndIPFilteringLogs",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.insights/components",
+        "category": "AppBrowserTimings",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.insights/components",
+        "category": "AppMetrics",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.insights/components",
+        "category": "AppPageViews",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.insights/components",
+        "category": "AppPerformanceCounters",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AddonAzureBackupAlerts",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AddonAzureBackupPolicy",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AddonAzureBackupStorage",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AddonAzureBackupProtectedInstance",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AzureSiteRecoveryJobs",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AzureSiteRecoveryEvents",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AzureSiteRecoveryReplicatedItems",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AzureSiteRecoveryReplicationStats",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.recoveryservices/vaults",
+        "category": "AzureSiteRecoveryRecoveryPoints",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.automation/automationaccounts",
+        "category": "JobStreams",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.automation/automationaccounts",
+        "category": "DscNodeStatus",
+        "reason": "Not critical"
+    },
+    {
+        "resourceType": "microsoft.compute/disks",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.network/natgateways",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.web/serverfarms",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.dbforpostgresql/flexibleservers",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.sql/servers",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.insights/autoscalesettings",
+        "category": "AutoscaleEvaluations",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.insights/autoscalesettings",
+        "category": "AutoscaleScaleActions",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.insights/autoscalesettings",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.dbformysql/flexibleservers",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "category": "SummaryLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "category": "Jobs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.web/sites/slots",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.web/sites/slots",
+        "category": "AppServiceAntivirusScanAuditLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.web/sites/slots",
+        "category": "AppServiceFileAuditLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.web/sites/slots",
+        "category": "AppServiceAuditLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.web/sites/slots",
+        "category": "AppServiceIPSecAuditLogs",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.cognitiveservices/accounts",
+        "category": "RequestResponse",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.cognitiveservices/accounts",
+        "category": "AzureOpenAIRequestUsage",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.cognitiveservices/accounts",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.cognitiveservices/accounts/projects",
+        "category": "Trace",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.cognitiveservices/accounts/projects",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.cdn/profiles/endpoints",
+        "category": "CoreAnalytics",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.appconfiguration/configurationstores",
+        "category": "HttpRequest",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.appconfiguration/configurationstores",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.network/dnszones",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.cdn/profiles",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.network/trafficmanagerprofiles",
+        "category": "ProbeHealthStatusEvents",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/trafficmanagerprofiles",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.eventgrid/topics",
+        "category": "PublishFailures",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.eventgrid/topics",
+        "category": "DataPlaneRequests",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.eventgrid/topics",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.aad/domainservices",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/applicationgroups",
+        "category": "Error",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/applicationgroups",
+        "category": "Management",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/applicationgroups",
+        "category": "Checkpoint",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/workspaces",
+        "category": "Checkpoint",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/workspaces",
+        "category": "Feed",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.web/connections",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "Checkpoint",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "Connection",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "HostRegistration",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "AgentHealthStatus",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "NetworkData",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "ConnectionGraphicsData",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "AutoscaleEvaluationPooled",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.desktopvirtualization/hostpools",
+        "category": "MultiLinkAdd",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/loadbalancers",
+        "category": "LoadBalancerHealthEvent",
+        "reason": "Too verbose"
+    },
+    {
+        "resourceType": "microsoft.network/loadbalancers",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.web/sites",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.containerservice/managedclusters",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.network/applicationgateways",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.keyvault/vaults",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.servicebus/namespaces",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.automation/automationaccounts",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.logic/workflows",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    },
+    {
+        "resourceType": "microsoft.datafactory/factories",
+        "category": "AllMetrics",
+        "reason": "Too verbose, use metrics instead"
+    }
+]
